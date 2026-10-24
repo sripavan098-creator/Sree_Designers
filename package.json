@@ -1,11 +1,13 @@
 {
   "name": "sree-designers",
   "version": "1.0.0",
-  "description": "Catalogue and WhatsApp ordering site for Sree Designers — computer embroidery and maggam work.",
+  "description": "Catalogue and WhatsApp ordering site for Sree Designers \u2014 computer embroidery and maggam work.",
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "node --watch server/index.js"
+    "dev": "node --watch server/index.js",
+    "build:static": "node scripts/build-static.js",
+    "deploy:vercel": "node scripts/build-static.js && npx vercel deploy --temporary --yes"
   },
   "type": "commonjs",
   "dependencies": {

@@ -234,6 +234,8 @@
   async function paintSessionSlot() {
     const slot = document.querySelector('[data-session-slot]');
     if (!slot) return;
+    // Static builds have no server, so there is nothing to sign in to.
+    if (document.body.dataset.static) { slot.innerHTML = ''; return; }
     const user = await getSession();
 
     if (user) {
@@ -270,6 +272,10 @@
     if (!host) return;
     const name = settings.businessName || 'Sree Designers';
     const year = new Date().getFullYear();
+    // No accounts on a static host, so that column would be a dead end.
+    const accountLink = document.body.dataset.static
+      ? ''
+      : '<li><a href="/account">Your account</a></li>';
     host.innerHTML = `
       <footer class="footer">
         <div class="wrap">
@@ -295,7 +301,7 @@
               <h4>Ordering</h4>
               <ul>
                 <li><a href="/cart">Send cart on WhatsApp</a></li>
-                <li><a href="/account">Your account</a></li>
+                ${accountLink}
               </ul>
             </div>
           </div>
