@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design — Stitch &amp; Steam Studio</title>
+<meta name="description" content="Full-size design photo, price, and add to cart. Send your selection to the studio on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Karla:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23b08626'/%3E%3Ctext x='16' y='22' font-size='17' font-family='Georgia' text-anchor='middle' fill='%232a1f05'%3ES%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main class="wrap" style="padding:clamp(28px,5vw,56px) 0">
+  <p class="crumbs" id="crumbs"><a href="/">Home</a></p>
+  <div id="detail-root">
+    <div class="detail">
+      <div class="skel" style="aspect-ratio:4/5;border-radius:6px"></div>
+      <div><div class="skel" style="height:34px;margin-bottom:16px"></div><div class="skel" style="height:16px;width:70%;margin-bottom:10px"></div><div class="skel" style="height:16px;width:45%"></div></div>
+    </div>
+  </div>
+
+  <section class="band" id="related-band" hidden>
+    <div class="band__head">
+      <div>
+        <p class="eyebrow">More like this</p>
+        <h2 id="related-title">From the same category</h2>
+      </div>
+    </div>
+    <div class="swatches swatches--dense" id="related-grid"></div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="/js/app.js"></script>
+<script src="/js/design.js"></script>
+</body>
+</html>
