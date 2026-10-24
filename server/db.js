@@ -137,7 +137,7 @@ function seed() {
   }
 
   if (!getSetting('whatsapp_number')) setSetting('whatsapp_number', '');
-  if (!getSetting('business_name')) setSetting('business_name', 'Stitch & Steam Studio');
+  if (!getSetting('business_name')) setSetting('business_name', 'Sree Designers');
   if (!getSetting('business_tagline')) {
     setSetting('business_tagline', 'Computer embroidery and maggam work for blouses — designed, digitised and stitched in-house.');
   }

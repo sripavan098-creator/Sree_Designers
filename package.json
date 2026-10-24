@@ -1,7 +1,7 @@
 {
-  "name": "stitch-and-steam-studio",
+  "name": "sree-designers",
   "version": "1.0.0",
-  "description": "Catalogue website for a computer embroidery and maggam work studio, with an admin console and WhatsApp ordering.",
+  "description": "Catalogue and WhatsApp ordering site for Sree Designers — computer embroidery and maggam work.",
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",

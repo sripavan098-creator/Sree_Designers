@@ -1,4 +1,4 @@
-# Stitch & Steam Studio
+# Sree Designers
 
 A catalogue website for a computer embroidery and maggam work studio. Customers
 browse design photos, add them to a cart, and send the cart to the studio's
