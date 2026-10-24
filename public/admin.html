@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio console — Stitch &amp; Steam Studio</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Karla:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23b08626'/%3E%3Ctext x='16' y='22' font-size='17' font-family='Georgia' text-anchor='middle' fill='%232a1f05'%3ES%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div id="signin" class="authpage" hidden>
+  <div class="authcard">
+    <div class="authcard__head">
+      <span class="brand" style="justify-content:center">
+        <span class="brand__mark" aria-hidden="true">S</span>
+        <span><span class="brand__name" data-brand-name>Stitch &amp; Steam Studio</span><span class="brand__sub">Studio console</span></span>
+      </span>
+    </div>
+    <div class="card">
+      <h1 style="font-size:1.5rem;margin-bottom:.2em">Studio sign in</h1>
+      <p class="muted tiny" style="margin-bottom:1.6em">Admin access only. This page is not linked from the shop.</p>
+      <div class="alert alert--err" id="signin-err" hidden></div>
+      <form id="signin-form" novalidate>
+        <div class="field">
+          <label for="admin-email">Email</label>
+          <input type="email" id="admin-email" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="admin-password">Password</label>
+          <input type="password" id="admin-password" autocomplete="current-password" required>
+        </div>
+        <button class="btn btn--thread btn--block" type="submit" id="signin-submit">Sign in</button>
+      </form>
+      <p class="tiny" style="text-align:center;margin:1.4em 0 0"><a href="/" style="color:var(--ink-faint)">← Back to the shop</a></p>
+    </div>
+  </div>
+</div>
+
+<div id="admin-shell" hidden>
+  <div id="admin-bar"></div>
+  <header class="masthead">
+    <div class="wrap masthead__inner">
+      <a class="brand" href="/admin">
+        <span class="brand__mark" aria-hidden="true">S</span>
+        <span><span class="brand__name" data-brand-name>Stitch &amp; Steam Studio</span><span class="brand__sub">Studio console</span></span>
+      </a>
+      <nav class="tabs" aria-label="Console">
+        <a class="tab" href="/" target="_blank" rel="noopener">View shop</a>
+        <button class="tab" type="button" id="signout">Sign out</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" style="padding:clamp(24px,4vw,44px) 0 80px">
+    <div class="stat-grid" id="stats"></div>
+
+    <div class="admin-tabs" role="tablist">
+      <button class="admin-tab" role="tab" data-tab="upload" aria-selected="true">Upload designs</button>
+      <button class="admin-tab" role="tab" data-tab="designs" aria-selected="false">Manage designs</button>
+      <button class="admin-tab" role="tab" data-tab="categories" aria-selected="false">Categories</button>
+      <button class="admin-tab" role="tab" data-tab="users" aria-selected="false">User logins</button>
+      <button class="admin-tab" role="tab" data-tab="orders" aria-selected="false">Orders</button>
+      <button class="admin-tab" role="tab" data-tab="settings" aria-selected="false">Settings</button>
+    </div>
+
+    <!-- Upload -->
+    <section class="panel" id="panel-upload" role="tabpanel">
+      <div class="card" style="max-width:760px">
+        <h2 style="font-size:1.4rem">Upload design photos</h2>
+        <p class="muted tiny" style="margin-bottom:1.6em">Choose the section and category first, then drop in as many photos as you like. Every photo becomes its own design in that category.</p>
+
+        <div class="alert alert--ok" id="upload-ok" hidden></div>
+        <div class="alert alert--err" id="upload-err" hidden></div>
+
+        <form id="upload-form">
+          <div class="field--row">
+            <div class="field">
+              <label for="up-section">Section</label>
+              <select id="up-section" required></select>
+            </div>
+            <div class="field">
+              <label for="up-category">Category</label>
+              <select id="up-category" required></select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="up-title">Title <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+            <input type="text" id="up-title" maxlength="90" placeholder="e.g. Peacock heavy work blouse">
+            <p class="field__hint">Leave blank and each design is named after its category. With several photos at once, numbers are appended.</p>
+          </div>
+
+          <div class="field">
+            <label for="up-description">Description <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+            <textarea id="up-description" maxlength="600" placeholder="Thread colours, stitch type, fabric suggestions…"></textarea>
+          </div>
+
+          <div class="field--row">
+            <div class="field">
+              <label for="up-price">Price per piece (₹) <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+              <input type="number" id="up-price" min="0" step="1" placeholder="0">
+              <p class="field__hint">Leave as 0 to show “On request”.</p>
+            </div>
+            <div class="field" style="display:flex;align-items:flex-end;padding-bottom:14px">
+              <label class="check"><input type="checkbox" id="up-featured"> Show on the home page</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Photos</label>
+            <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose photos">
+              <strong>Drop photos here</strong>
+              <span>or click to choose · JPG, PNG, WEBP, GIF, AVIF · up to 8 MB each</span>
+            </div>
+            <input type="file" id="up-files" accept="image/*" multiple hidden>
+            <div class="previews" id="previews"></div>
+          </div>
+
+          <button class="btn btn--thread" type="submit" id="upload-submit">Upload designs</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Designs -->
+    <section class="panel" id="panel-designs" role="tabpanel" hidden>
+      <div class="band__head" style="margin-bottom:18px">
+        <div><h2 style="font-size:1.4rem;margin:0">Manage designs</h2></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <select id="filter-section" style="padding:9px 12px;border:1px solid var(--line);border-radius:3px;background:var(--paper);font-family:var(--font-body)"></select>
+          <select id="filter-category" style="padding:9px 12px;border:1px solid var(--line);border-radius:3px;background:var(--paper);font-family:var(--font-body)"></select>
+        </div>
+      </div>
+      <div class="table-wrap"><table class="table" id="designs-table"></table></div>
+    </section>
+
+    <!-- Categories -->
+    <section class="panel" id="panel-categories" role="tabpanel" hidden>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:26px;align-items:start" id="cat-layout">
+        <div>
+          <h2 style="font-size:1.4rem">Categories</h2>
+          <p class="muted tiny" style="margin-bottom:1.4em">These are the groups customers browse. Rename them any time.</p>
+          <div id="cats-embroidery"></div>
+          <div id="cats-maggam" style="margin-top:26px"></div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1.1rem">Add a category</h3>
+          <div class="alert alert--ok" id="cat-ok" hidden></div>
+          <div class="alert alert--err" id="cat-err" hidden></div>
+          <form id="cat-form">
+            <div class="field">
+              <label for="cat-name">Name</label>
+              <input type="text" id="cat-name" maxlength="60" placeholder="e.g. Kids Wear" required>
+            </div>
+            <div class="field">
+              <label for="cat-section">Section</label>
+              <select id="cat-section"></select>
+            </div>
+            <div class="field">
+              <label for="cat-blurb">Short description</label>
+              <textarea id="cat-blurb" maxlength="240" placeholder="One line shown on the category tile."></textarea>
+            </div>
+            <button class="btn btn--thread btn--sm" type="submit">Add category</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Users -->
+    <section class="panel" id="panel-users" role="tabpanel" hidden>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:26px;align-items:start">
+        <div>
+          <h2 style="font-size:1.4rem">Customer logins</h2>
+          <p class="muted tiny" style="margin-bottom:1.4em">Create a login for a customer here and share the password with them. They sign in at <code>/account</code>.</p>
+          <div class="table-wrap"><table class="table" id="users-table"></table></div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1.1rem">Create a login</h3>
+          <div class="alert alert--ok" id="user-ok" hidden></div>
+          <div class="alert alert--err" id="user-err" hidden></div>
+          <form id="user-form">
+            <div class="field">
+              <label for="user-email">Email</label>
+              <input type="email" id="user-email" required placeholder="customer@email.com">
+            </div>
+            <div class="field">
+              <label for="user-name">Name</label>
+              <input type="text" id="user-name" maxlength="80" placeholder="Customer name">
+            </div>
+            <div class="field">
+              <label for="user-phone">Phone / WhatsApp</label>
+              <input type="tel" id="user-phone" maxlength="30" placeholder="+91…">
+            </div>
+            <div class="field">
+              <label for="user-password">Password</label>
+              <input type="text" id="user-password" minlength="8" required placeholder="At least 8 characters">
+              <button class="linkbtn" type="button" id="gen-password" style="margin-top:6px">Generate a strong one</button>
+            </div>
+            <button class="btn btn--thread btn--sm" type="submit">Create login</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Orders -->
+    <section class="panel" id="panel-orders" role="tabpanel" hidden>
+      <h2 style="font-size:1.4rem">Orders sent to WhatsApp</h2>
+      <p class="muted tiny" style="margin-bottom:1.4em">Every time a customer presses buy, the order is recorded here before WhatsApp opens.</p>
+      <div class="table-wrap"><table class="table" id="orders-table"></table></div>
+    </section>
+
+    <!-- Settings -->
+    <section class="panel" id="panel-settings" role="tabpanel" hidden>
+      <div style="display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:26px;align-items:start" id="settings-layout">
+        <div class="card">
+          <h2 style="font-size:1.4rem">Studio settings</h2>
+          <div class="alert alert--ok" id="set-ok" hidden></div>
+          <div class="alert alert--err" id="set-err" hidden></div>
+          <form id="settings-form">
+            <div class="field">
+              <label for="set-name">Business name</label>
+              <input type="text" id="set-name" maxlength="80">
+            </div>
+            <div class="field">
+              <label for="set-tagline">Tagline</label>
+              <textarea id="set-tagline" maxlength="240"></textarea>
+            </div>
+            <div class="field">
+              <label for="set-whatsapp">WhatsApp number</label>
+              <input type="tel" id="set-whatsapp" maxlength="20" placeholder="+919876543210">
+              <p class="field__hint">Country code and digits only. Cart orders open a chat with this number. This must be set before customers can buy.</p>
+            </div>
+            <button class="btn btn--thread" type="submit">Save settings</button>
+          </form>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1.1rem">Brand logo</h3>
+          <p class="tiny muted">Shown in the header and footer of every page. A square PNG with a transparent background works best.</p>
+          <div id="logo-preview" style="margin-bottom:14px"></div>
+          <div class="alert alert--ok" id="logo-ok" hidden></div>
+          <div class="alert alert--err" id="logo-err" hidden></div>
+          <input type="file" id="logo-file" accept="image/*" style="font-size:.8rem;margin-bottom:10px;display:block">
+          <div style="display:flex;gap:9px;flex-wrap:wrap">
+            <button class="btn btn--thread btn--sm" type="button" id="logo-save">Upload logo</button>
+            <button class="btn btn--ghost btn--sm" type="button" id="logo-clear">Remove logo</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size:1.1rem">Admin password</h3>
+          <div class="alert alert--ok" id="pw-ok" hidden></div>
+          <div class="alert alert--err" id="pw-err" hidden></div>
+          <form id="admin-pw-form">
+            <div class="field">
+              <label for="admin-new-pw">New password</label>
+              <input type="password" id="admin-new-pw" minlength="8" autocomplete="new-password">
+            </div>
+            <button class="btn btn--ghost btn--sm" type="submit">Update password</button>
+          </form>
+          <p class="tiny muted" style="margin-top:1.2em">Changing this signs out every other device.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="/js/app.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

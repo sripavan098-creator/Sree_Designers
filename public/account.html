@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in — Stitch &amp; Steam Studio</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Karla:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23b08626'/%3E%3Ctext x='16' y='22' font-size='17' font-family='Georgia' text-anchor='middle' fill='%232a1f05'%3ES%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="authpage">
+  <div class="authcard">
+    <div class="authcard__head">
+      <a class="brand" href="/" style="justify-content:center">
+        <span class="brand__mark" aria-hidden="true">S</span>
+        <span><span class="brand__name" data-brand-name>Stitch &amp; Steam Studio</span><span class="brand__sub">Customer account</span></span>
+      </a>
+    </div>
+
+    <div class="card">
+      <h1 style="font-size:1.6rem;margin-bottom:.2em">Welcome back</h1>
+      <p class="muted tiny" style="margin-bottom:1.6em">Sign in with the account the studio set up for you.</p>
+
+      <div class="alert alert--err" id="err" hidden></div>
+
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="current-password" required>
+        </div>
+        <button class="btn btn--thread btn--block" type="submit" id="submit">Sign in</button>
+      </form>
+
+      <p class="tiny muted" style="margin:1.4em 0 0;text-align:center">
+        Accounts are created by the studio. Ask us on WhatsApp if you need access.
+      </p>
+    </div>
+
+    <p class="tiny" style="text-align:center;margin-top:1.6em">
+      <a href="/" style="color:var(--ink-faint)">← Back to the shop</a>
+    </p>
+  </div>
+</div>
+
+<script src="/js/app.js"></script>
+<script src="/js/account.js"></script>
+</body>
+</html>
