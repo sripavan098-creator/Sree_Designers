@@ -62,8 +62,8 @@ public sign-up form exists.
 - **Orders** — every order sent to WhatsApp is recorded here.
 - **Settings** — business name, tagline, the WhatsApp number, and the brand logo.
 
-The WhatsApp number must be set before customers can buy. Until then the buy
-button reports that ordering is not available yet.
+The WhatsApp number is set to `+917396038366`. If it is ever cleared, the buy
+button reports that ordering is not available yet until it is set again.
 
 ## Data
 
