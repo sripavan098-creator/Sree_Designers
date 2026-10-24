@@ -72,7 +72,7 @@ if (require.main === module) {
   auth.purgeExpiredSessions();
   setInterval(auth.purgeExpiredSessions, 6 * 60 * 60 * 1000).unref();
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Stitch & Steam Studio running on http://0.0.0.0:${PORT}`);
+    console.log(`Sree Designers running on http://0.0.0.0:${PORT}`);
   });
 }
 

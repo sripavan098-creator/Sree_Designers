@@ -180,7 +180,7 @@
     return sessionCache;
   }
 
-  let brandLogoUrl = '';
+  let brandLogoUrl = '/img/logo-mark.png';
 
   function brandMark() {
     if (brandLogoUrl) {
@@ -205,7 +205,7 @@
           <a class="brand" href="/">
             ${brandMark()}
             <span>
-              <span class="brand__name" data-brand-name>Stitch &amp; Steam Studio</span>
+              <span class="brand__name" data-brand-name>Sree Designers</span>
               <span class="brand__sub">Embroidery · Maggam</span>
             </span>
           </a>
@@ -268,7 +268,7 @@
   function renderFooter(settings = {}) {
     const host = document.getElementById('site-footer');
     if (!host) return;
-    const name = settings.businessName || 'Stitch & Steam Studio';
+    const name = settings.businessName || 'Sree Designers';
     const year = new Date().getFullYear();
     host.innerHTML = `
       <footer class="footer">
@@ -317,8 +317,11 @@
   async function loadSettings() {
     try {
       const s = await API.get('/api/settings');
-      brandLogoUrl = s.logoUrl || '';
+      brandLogoUrl = s.logoUrl || '/img/logo-mark.png';
       paintBrandMarks();
+      document.querySelectorAll('[data-brand-logo-full]').forEach((el) => {
+        el.src = s.logoUrl || '/img/logo.png';
+      });
       const nameEl = document.querySelector('[data-brand-name]');
       if (nameEl && s.businessName) nameEl.textContent = s.businessName;
       document.querySelectorAll('[data-business-name]').forEach((el) => { el.textContent = s.businessName; });
